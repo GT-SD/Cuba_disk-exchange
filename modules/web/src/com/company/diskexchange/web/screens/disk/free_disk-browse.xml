@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://freeDiskBrowse.caption"
+        focusComponent="disksTable"
+        messagesPack="com.company.diskexchange.web.screens.disk">
+    <data readOnly="true">
+        <collection id="disksDc"
+                    class="com.company.diskexchange.entity.Disk">
+            <view extends="_local">
+                <property name="owner" view="_minimal">
+                    <property name="firstName"/>
+                    <property name="lastName"/>
+                </property>
+            </view>
+            <loader id="disksDl">
+                <query>
+                    <![CDATA[select e from diskexchange_Disk e
+                    JOIN e.owner o
+                    WHERE e.id NOT IN(SELECT t.disk.id FROM diskexchange_TakenItem t)
+                    AND e.id <> :owner_ID
+                    ]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="disksTable"
+            spacing="true">
+        <groupTable id="disksTable"
+                    width="100%"
+                    dataContainer="disksDc">
+            <columns>
+                <column id="name"/>
+                <column id="owner"/>
+            </columns>
+            <rowsCount/>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

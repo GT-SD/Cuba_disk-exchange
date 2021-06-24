@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://takenItemFromBrowse.caption"
+        focusComponent="takenItemsTable"
+        messagesPack="com.company.diskexchange.web.screens.takenitem">
+    <data readOnly="true">
+        <collection id="takenItemsDc"
+                    class="com.company.diskexchange.entity.TakenItem">
+            <view extends="_local">
+                <property name="disk" view="_minimal"/>
+                <property name="user" view="_minimal">
+                    <property name="firstName"/>
+                    <property name="lastName"/>
+                </property>
+            </view>
+            <loader id="takenItemsDl">
+                <query>
+                    <![CDATA[select e from diskexchange_TakenItem e
+                            WHERE e.disk.owner = :owner
+                    ]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="takenItemsTable"
+            spacing="true">
+        <groupTable id="takenItemsTable"
+                    width="100%"
+                    dataContainer="takenItemsDc">
+            <actions>
+            </actions>
+            <columns>
+                <column id="disk"/>
+                <column id="user"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

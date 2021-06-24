@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-diskexchange" insertBefore="administration" caption="mainMsg://menu_config.application-diskexchange">
+        <item screen="diskexchange_Disk.browse" caption="mainMsg://menu_config.diskexchange_Disk.browse"/>
+        <item screen="diskexchange_FreeDisk.browse" caption="mainMsg://menu_config.diskexchange_FreeDisk.browse"/>
+        <item screen="diskexchange_TakenItem.browse" caption="mainMsg://menu_config.diskexchange_TakenItem.browse"/>
+        <item screen="diskexchange_TakenItemFrom.browse"
+              caption="mainMsg://menu_config.diskexchange_TakenItemFrom.browse"/>
+    </menu>
+</menu-config>
